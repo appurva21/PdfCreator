@@ -57,92 +57,92 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createPdf() {
-        Document doc = new Document();
+            Document doc = new Document();
 
 
-        try {
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/i.fest.volunteer";
+            try {
+                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/i.fest.volunteer";
 
-            File dir = new File(path);
-            if (!dir.exists())
-                dir.mkdirs();
+                File dir = new File(path);
+                if (!dir.exists())
+                    dir.mkdirs();
 
-            Log.d("PDFCreator", "PDF Path: " + path);
-
-
-            File file = new File(dir, "i.Fest_Registration_Deatils_2017.pdf");
-            FileOutputStream fOut = new FileOutputStream(file);
-
-            PdfWriter.getInstance(doc, fOut);
-
-            //open the document
-            doc.open();
+                Log.d("PDFCreator", "PDF Path: " + path);
 
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.ifestlogow);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            Image myImg = Image.getInstance(stream.toByteArray());
-            // myImg.setAlignment(Image.ALIGN_LEFT);
+                File file = new File(dir, "i.Fest_Registration_Deatils_2017.pdf");
+                FileOutputStream fOut = new FileOutputStream(file);
 
-            ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
-            Bitmap bitmap2 = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.ieeelogo);
-            bitmap2.compress(Bitmap.CompressFormat.PNG, 100, stream2);
-            Image myImg2 = Image.getInstance(stream2.toByteArray());
-            // myImg2.setAlignment(Image.RIGHT);
+                PdfWriter.getInstance(doc, fOut);
 
-            ByteArrayOutputStream stream3 = new ByteArrayOutputStream();
-            Bitmap bitmap3 = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.ieeelogo);
-            bitmap3.compress(Bitmap.CompressFormat.PNG, 100, stream3);
-            Image myImg3 = Image.getInstance(stream3.toByteArray());
-            // myImg2.setAlignment(Image.RIGHT);
+                //open the document
+                doc.open();
 
 
-            PdfPTable table = new PdfPTable(3);
-            table.setSpacingAfter(10);
-            table.setWidthPercentage(100);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.ifestlogow);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                Image myImg = Image.getInstance(stream.toByteArray());
+                // myImg.setAlignment(Image.ALIGN_LEFT);
 
-            PdfPCell cell = new PdfPCell();
-            Paragraph p = new Paragraph();
-            p.add(new Chunk(myImg, 0, 0));
-            p.setAlignment(Paragraph.ALIGN_LEFT | Paragraph.ALIGN_BOTTOM);
-            cell.addElement(p);
-            cell.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
-            table.addCell(cell);
+                ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+                Bitmap bitmap2 = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.ieeelogo);
+                bitmap2.compress(Bitmap.CompressFormat.PNG, 100, stream2);
+                Image myImg2 = Image.getInstance(stream2.toByteArray());
+                // myImg2.setAlignment(Image.RIGHT);
 
-            PdfPCell cell2 = new PdfPCell();
-            Paragraph p2 = new Paragraph();
-            p2.add(new Chunk(myImg2, 0, 0));
-            p2.setAlignment(Paragraph.ALIGN_CENTER);
-            cell2.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
-            cell2.addElement(p2);
-            table.addCell(cell2);
+                ByteArrayOutputStream stream3 = new ByteArrayOutputStream();
+                Bitmap bitmap3 = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.ieeelogo);
+                bitmap3.compress(Bitmap.CompressFormat.PNG, 100, stream3);
+                Image myImg3 = Image.getInstance(stream3.toByteArray());
+                // myImg2.setAlignment(Image.RIGHT);
 
 
-            PdfPCell cell3 = new PdfPCell();
-            Paragraph p3 = new Paragraph();
-            p3.add(new Chunk(myImg3, 0, 0));
-            p3.setAlignment(Paragraph.ALIGN_RIGHT);
-            cell3.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
-            cell3.addElement(p2);
-            table.addCell(cell3);
+                PdfPTable table = new PdfPTable(3);
+                table.setSpacingAfter(10);
+                table.setWidthPercentage(100);
 
-            doc.add(table);
+                PdfPCell cell = new PdfPCell();
+                Paragraph p = new Paragraph();
+                p.add(new Chunk(myImg, 0, 0));
+                p.setAlignment(Paragraph.ALIGN_LEFT | Paragraph.ALIGN_BOTTOM);
+                cell.addElement(p);
+                cell.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
+                table.addCell(cell);
 
-            Font paraFont = new Font(Font.FontFamily.COURIER, 20, Font.BOLD, BaseColor.RED);
-            Chunk p4Text = new Chunk("Hello "+name, paraFont);
-            Paragraph p4 = new Paragraph(p4Text);
-            p4.setAlignment(Paragraph.ALIGN_LEFT);
-            doc.add(p4);
+                PdfPCell cell2 = new PdfPCell();
+                Paragraph p2 = new Paragraph();
+                p2.add(new Chunk(myImg2, 0, 0));
+                p2.setAlignment(Paragraph.ALIGN_CENTER);
+                cell2.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
+                cell2.addElement(p2);
+                table.addCell(cell2);
 
-            paraFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, BaseColor.BLACK);
-            Chunk p5Text = new Chunk("\nWe are pleased to inform you that you have been successfully registered for i.Fest'17.", paraFont);
-            Paragraph p5 = new Paragraph(p5Text);
-            p5.setAlignment(Paragraph.ALIGN_LEFT);
-            doc.add(p5);
 
-            Phrase ph6 = new Phrase();
-            ph6.add( new Chunk("Registration ID: ", new Font(Font.FontFamily.COURIER, 14, Font.BOLD, BaseColor.BLACK)) );
+                PdfPCell cell3 = new PdfPCell();
+                Paragraph p3 = new Paragraph();
+                p3.add(new Chunk(myImg3, 0, 0));
+                p3.setAlignment(Paragraph.ALIGN_RIGHT);
+                cell3.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
+                cell3.addElement(p2);
+                table.addCell(cell3);
+
+                doc.add(table);
+
+                Font paraFont = new Font(Font.FontFamily.COURIER, 20, Font.BOLD, BaseColor.RED);
+                Chunk p4Text = new Chunk("Hello "+name, paraFont);
+                Paragraph p4 = new Paragraph(p4Text);
+                p4.setAlignment(Paragraph.ALIGN_LEFT);
+                doc.add(p4);
+
+                paraFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, BaseColor.BLACK);
+                Chunk p5Text = new Chunk("\nWe are pleased to inform you that you have been successfully registered for i.Fest'17.", paraFont);
+                Paragraph p5 = new Paragraph(p5Text);
+                p5.setAlignment(Paragraph.ALIGN_LEFT);
+                doc.add(p5);
+
+                Phrase ph6 = new Phrase();
+                ph6.add( new Chunk("Registration ID: ", new Font(Font.FontFamily.COURIER, 14, Font.BOLD, BaseColor.BLACK)) );
             ph6.add(new Chunk(regdID, new Font(Font.FontFamily.COURIER, 14, Font.NORMAL, BaseColor.BLUE)));
             doc.add(ph6);
 
